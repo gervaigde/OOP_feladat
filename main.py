@@ -97,23 +97,27 @@ class Autokolcsonzo:
             print(f"{b.datum.date()} - {b.auto.rendszam} ({b.auto.tipus}) - Bérelte: {b.berlo.nev}")
 
 # ------------------ Tesztadatok betöltése ------------------
-kolcsonzo = Autokolcsonzo("Teszt Kölcsönző")
-kolcsonzo.autok_hozzaadasa(Szemelyauto("ABC123", "Toyota Corolla", 10000, 5))
-kolcsonzo.autok_hozzaadasa(Szemelyauto("XYZ789", "Ford Focus", 12000, 5))
-kolcsonzo.autok_hozzaadasa(Teherauto("DEF456", "Mercedes Sprinter", 15000, 2000))
+def tesztadatok_betoltese(kolcsonzo, diak_user, tanar_user):
+    kolcsonzo.autok_hozzaadasa(Szemelyauto("ABC123", "Toyota Corolla", 10000, 5))
+    kolcsonzo.autok_hozzaadasa(Szemelyauto("XYZ789", "Ford Focus", 12000, 5))
+    kolcsonzo.autok_hozzaadasa(Teherauto("DEF456", "Mercedes Sprinter", 15000, 2000))
 
-diak_user = User("Kiss Pista")
-tanar_user = User("Tanár Béla", szerep="tanar")
-kolcsonzo.auto_berlese("ABC123", "2025-05-20", diak_user)
-kolcsonzo.auto_berlese("DEF456", "2025-05-21", tanar_user)
-kolcsonzo.auto_berlese("XYZ789", "2025-05-22", diak_user)
-kolcsonzo.auto_berlese("DEF456", "2025-05-23", diak_user)
+    kolcsonzo.auto_berlese("ABC123", "2025-05-20", diak_user)
+    kolcsonzo.auto_berlese("DEF456", "2025-05-21", tanar_user)
+    kolcsonzo.auto_berlese("XYZ789", "2025-05-22", diak_user)
+    kolcsonzo.auto_berlese("DEF456", "2025-05-23", diak_user)
 
 # ------------------ Konzolos menü ------------------
 def menu():
+    kolcsonzo = Autokolcsonzo("Teszt Kölcsönző")
     nev = input("Add meg a neved: ")
     szerep = input("Szerepkör (diak/tanar): ")
     user = User(nev, szerep)
+
+    # Tesztadatokat csak akkor töltjük be, ha tanárként lép be a felhasználó
+    if user.szerep == "tanar":
+        tesztadatok_betoltese(kolcsonzo, user, user)
+
     while True:
         print("\n1. Autó bérlése\n2. Bérlés lemondása\n3. Bérlések listázása\n4. Kilépés")
         valasztas = input("Válassz: ")
