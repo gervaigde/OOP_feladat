@@ -40,9 +40,8 @@ class Berles:
 
 # ------------------ User osztály ------------------
 class User:
-    def __init__(self, nev, szerep="diak"):
+    def __init__(self, nev):
         self.nev = nev
-        self.szerep = szerep
 
 # ------------------ Autokolcsonzo osztály ------------------
 class Autokolcsonzo:
@@ -134,29 +133,14 @@ def menu():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("="*40)
     print("         GDE-Autókölcsönző Rendszer")
-    print("               Verzió: 1.0")
+    print("               Verzió: 2.0")
     print("="*40)
 
     kolcsonzo = Autokolcsonzo("Teszt Kölcsönző")
     tesztadatok_betoltese(kolcsonzo)
 
     nev = input("Add meg a neved: ")
-
-    while True:
-        print("\nVálassz szerepkört:")
-        print("1. Diák")
-        print("2. Tanár")
-        szerep_valasztas = input("Szerepkör száma (1/2): ")
-        if szerep_valasztas == "1":
-            szerep = "diak"
-            break
-        elif szerep_valasztas == "2":
-            szerep = "tanar"
-            break
-        else:
-            print("Érvénytelen választás. Próbáld újra.")
-
-    user = User(nev, szerep)
+    user = User(nev)
 
     while True:
         print("\nKiválasztható műveletek:")
